@@ -20,3 +20,8 @@ variable "project" {
 variable "slack_webhook" {
   description = "Slack incoming webhook to use for posting."
 }
+
+variable "attachment_color" {
+  description = "Color to use for attachement postings."
+  default     = "#00704a"
+}

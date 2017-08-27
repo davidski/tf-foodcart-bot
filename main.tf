@@ -87,18 +87,20 @@ resource "aws_lambda_permission" "from_cloudwatch_events" {
 }
 
 resource "aws_lambda_function" "foodcart_bot" {
-  s3_bucket     = "artifacts-severski"
-  s3_key        = "lambdas/foodcart-bot.zip"
-  function_name = "foodcart_bot"
-  role          = "${aws_iam_role.lambda_worker.arn}"
-  handler       = "main.lambda_handler"
-  description   = "Post today's food carts to Slack."
-  runtime       = "python3.6"
-  timeout       = 10
+  s3_bucket        = "artifacts-severski"
+  s3_key           = "lambdas/foodcart-bot.zip"
+  source_code_hash = "FOO"
+  function_name    = "foodcart_bot"
+  role             = "${aws_iam_role.lambda_worker.arn}"
+  handler          = "main.lambda_handler"
+  description      = "Post today's food carts to Slack."
+  runtime          = "python3.6"
+  timeout          = 10
 
   environment {
     variables = {
       slack_webhook_url = "${var.slack_webhook}"
+      attachment_color  = "${var.attachment_color}"
     }
   }
 
